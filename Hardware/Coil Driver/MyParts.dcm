@@ -1,5 +1,17 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 10nF
+D CAP FILM 10000PF 5% 630VDC RAD
+K cap capacitor WIMA film
+F https://www.wima.de/wp-content/uploads/media/e_WIMA_MKP_2.pdf
+$ENDCMP
+#
+$CMP B2100A
+D DIODE SCHOTTKY 2.0A 100V
+K diode Schottky
+F https://www.diodes.com/assets/Datasheets/B2100A.pdf
+$ENDCMP
+#
 $CMP DGD05473
 D IC GATE DRV HALF-BRDG DFN3030-10
 K GATE DRIVER HALF BRIDGE
