@@ -380,7 +380,7 @@ ENDDEF
 DEF Tag-connect_Tag-connect-NL J 0 40 Y Y 1 F N
 F0 "J" -300 0 50 H V L CNN
 F1 "Tag-connect_Tag-connect-NL" -300 -400 50 H V L CNN
-F2 "" 0 0 50 H I C CNN
+F2 "Tag-connect:TC2030-IDC-NL-FP" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
 S -300 -50 400 -350 0 1 0 N
