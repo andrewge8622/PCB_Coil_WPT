@@ -36,4 +36,15 @@ K BUCK DC-DC STEP-DOWN
 F https://ww1.microchip.com/downloads/en/DeviceDoc/20005308C.pdf
 $ENDCMP
 #
+$CMP PTS647
+D Tactile Switch spst-NO Top Actuated Surface Mount
+K switch normally-open pushbutton push-button
+F https://dznh3ojzb2azq.cloudfront.net/products/Tactile/PTS647/documents/datasheet.pdf
+$ENDCMP
+#
+$CMP STM32F070F6P6
+D IC MCU 32BIT 32KB FLASH 20TSSOP
+F https://www.st.com/resource/en/datasheet/stm32f070f6.pdf
+$ENDCMP
+#
 #End Doc Library
