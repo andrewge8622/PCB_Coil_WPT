@@ -1763,8 +1763,6 @@ Wire Wire Line
 	8700 1350 10000 1350
 Wire Wire Line
 	10000 1350 10000 2000
-Text Label 9300 1750 2    50   ~ 0
-GD_EN
 Text Label 9300 2150 2    50   ~ 0
 HIN
 Text Label 9300 2450 2    50   ~ 0
@@ -1778,22 +1776,14 @@ Wire Wire Line
 $Comp
 L Connector:Conn_01x06_Male J4
 U 1 1 600594E3
-P 9750 1700
-F 0 "J4" H 10050 1300 50  0000 R CNN
-F 1 "0.1\" Header" H 10050 1200 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 9750 1700 50  0001 C CNN
-F 3 "~" H 9750 1700 50  0001 C CNN
-	1    9750 1700
+P 9850 1700
+F 0 "J4" H 10150 1300 50  0000 R CNN
+F 1 "0.1\" Header" H 10150 1200 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 9850 1700 50  0001 C CNN
+F 3 "~" H 9850 1700 50  0001 C CNN
+	1    9850 1700
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	8700 1450 9400 1450
-Wire Wire Line
-	8700 2050 9400 2050
-Wire Wire Line
-	9400 2050 9400 2000
-Wire Wire Line
-	9400 2000 9550 2000
 Wire Wire Line
 	9000 2150 9300 2150
 $Comp
@@ -1821,33 +1811,17 @@ F 3 "~" H 8900 2450 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	8700 1950 9400 1950
+	9500 1650 9500 1700
 Wire Wire Line
-	9400 1950 9400 1900
+	9500 1700 9650 1700
 Wire Wire Line
-	9400 1900 9550 1900
+	9500 1550 9500 1600
 Wire Wire Line
-	9400 1850 9400 1800
+	9500 1600 9650 1600
 Wire Wire Line
-	9400 1800 9550 1800
+	9500 1450 9500 1500
 Wire Wire Line
-	8700 1850 9400 1850
-Wire Wire Line
-	9400 1650 9400 1700
-Wire Wire Line
-	9400 1700 9550 1700
-Wire Wire Line
-	8700 1650 9400 1650
-Wire Wire Line
-	9400 1550 9400 1600
-Wire Wire Line
-	9400 1600 9550 1600
-Wire Wire Line
-	8700 1550 9400 1550
-Wire Wire Line
-	9400 1450 9400 1500
-Wire Wire Line
-	9400 1500 9550 1500
+	9500 1500 9650 1500
 $Comp
 L Device:C_Small C20
 U 1 1 601359B6
@@ -2105,12 +2079,6 @@ F 5 "FKP2J021001L00JSC9" V 4500 5500 50  0001 C CNN "MPN"
 	1    4500 5500
 	0    1    1    0   
 $EndComp
-Text Label 9050 1450 0    50   ~ 0
-LD1
-Text Label 9050 1550 0    50   ~ 0
-LD2
-Text Label 9050 1650 0    50   ~ 0
-LD3
 $Comp
 L Device:LED D10
 U 1 1 5FEAC94B
@@ -2405,4 +2373,42 @@ Wire Wire Line
 Connection ~ 6400 2400
 Wire Wire Line
 	6400 2400 7150 2400
+Wire Wire Line
+	8700 1850 9000 1850
+Wire Wire Line
+	8700 1950 9000 1950
+Wire Wire Line
+	8700 2050 9000 2050
+Text Label 9000 1850 2    50   ~ 0
+EX1
+Text Label 9000 1950 2    50   ~ 0
+EX2
+Text Label 9000 2050 2    50   ~ 0
+EX3
+Text Label 9450 2000 0    50   ~ 0
+EX1
+Text Label 9450 1900 0    50   ~ 0
+EX2
+Text Label 9450 1800 0    50   ~ 0
+EX3
+Wire Wire Line
+	9650 1800 9450 1800
+Wire Wire Line
+	9450 1900 9650 1900
+Wire Wire Line
+	9650 2000 9450 2000
+Wire Wire Line
+	8700 1450 9500 1450
+Wire Wire Line
+	8700 1550 9500 1550
+Wire Wire Line
+	8700 1650 9500 1650
+Text Label 9300 1750 2    50   ~ 0
+GD_EN
+Text Label 9050 1650 0    50   ~ 0
+LD3
+Text Label 9050 1550 0    50   ~ 0
+LD2
+Text Label 9050 1450 0    50   ~ 0
+LD1
 $EndSCHEMATC
