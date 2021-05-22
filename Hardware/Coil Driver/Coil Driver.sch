@@ -1947,8 +1947,8 @@ Text Notes 7000 7100 0    75   ~ 15
 Designed by A. Ge
 Text Notes 7350 7500 0    75   ~ 15
 Wireless Power Transmitter
-Text Notes 8150 7650 0    50   ~ 0
-12/?/2020
+Text Notes 8150 7650 0    75   ~ 0
+01/16/2021
 Text Notes 10600 7650 0    75   ~ 0
 01
 Text Notes 5050 650  0    75   ~ 15
