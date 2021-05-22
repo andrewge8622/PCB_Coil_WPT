@@ -1,4 +1,418 @@
-EESchema Schematic File Version 2
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L WPT_Project_Parts:MCP16331 U?
+U 1 1 60AC1812
+P 4300 1800
+F 0 "U?" H 4300 2267 50  0000 C CNN
+F 1 "MCP16331" H 4300 2176 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-6" H 4000 1150 50  0001 L CIN
+F 3 "https://ww1.microchip.com/downloads/en/DeviceDoc/20005308C.pdf" H 4050 2250 50  0001 C CNN
+	1    4300 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 60AC21D5
+P 3750 1750
+F 0 "R?" H 3818 1796 50  0000 L CNN
+F 1 "10k" H 3818 1705 50  0000 L CNN
+F 2 "" H 3750 1750 50  0001 C CNN
+F 3 "~" H 3750 1750 50  0001 C CNN
+	1    3750 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 60AC287D
+P 4800 1700
+F 0 "C?" H 4892 1746 50  0000 L CNN
+F 1 "100nF" H 4892 1655 50  0000 L CNN
+F 2 "" H 4800 1700 50  0001 C CNN
+F 3 "~" H 4800 1700 50  0001 C CNN
+	1    4800 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L WPT_Project_Parts:1N4148W-7-F D?
+U 1 1 60AC2E91
+P 5150 1600
+F 0 "D?" H 5150 1817 50  0000 C CNN
+F 1 "1N4148W-7-F" H 5150 1726 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-123" H 5150 1425 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds30086.pdf" H 5150 1600 50  0001 C CNN
+	1    5150 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L WPT_Project_Parts:B2100A D?
+U 1 1 60AC340A
+P 5200 1950
+F 0 "D?" V 5150 1750 50  0000 L CNN
+F 1 "B2100A" V 5250 1600 50  0000 L CNN
+F 2 "Diode_SMD:D_SMA" H 5200 1775 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/B2100A.pdf" H 5200 1950 50  0001 C CNN
+	1    5200 1950
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:L L?
+U 1 1 60AC40EF
+P 5550 1800
+F 0 "L?" V 5650 1950 50  0000 C CNN
+F 1 "15uH" V 5650 1700 50  0000 C CNN
+F 2 "" H 5550 1800 50  0001 C CNN
+F 3 "~" H 5550 1800 50  0001 C CNN
+	1    5550 1800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 60AC4794
+P 5800 2050
+F 0 "R?" H 5868 2096 50  0000 L CNN
+F 1 "31.6k" H 5868 2005 50  0000 L CNN
+F 2 "" H 5800 2050 50  0001 C CNN
+F 3 "~" H 5800 2050 50  0001 C CNN
+	1    5800 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 60AC4E53
+P 5800 2400
+F 0 "R?" H 5868 2446 50  0000 L CNN
+F 1 "10k" H 5868 2355 50  0000 L CNN
+F 2 "" H 5800 2400 50  0001 C CNN
+F 3 "~" H 5800 2400 50  0001 C CNN
+	1    5800 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 60AC5520
+P 2600 1550
+F 0 "C?" H 2692 1596 50  0000 L CNN
+F 1 "10uF" H 2692 1505 50  0000 L CNN
+F 2 "" H 2600 1550 50  0001 C CNN
+F 3 "~" H 2600 1550 50  0001 C CNN
+	1    2600 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 60AC5B22
+P 3000 1550
+F 0 "C?" H 3092 1596 50  0000 L CNN
+F 1 "10uF" H 3092 1505 50  0000 L CNN
+F 2 "" H 3000 1550 50  0001 C CNN
+F 3 "~" H 3000 1550 50  0001 C CNN
+	1    3000 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 60AC5C99
+P 6150 1900
+F 0 "C?" H 6242 1946 50  0000 L CNN
+F 1 "10uF" H 6242 1855 50  0000 L CNN
+F 2 "" H 6150 1900 50  0001 C CNN
+F 3 "~" H 6150 1900 50  0001 C CNN
+	1    6150 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 60AC63AF
+P 6500 1900
+F 0 "C?" H 6592 1946 50  0000 L CNN
+F 1 "10uF" H 6592 1855 50  0000 L CNN
+F 2 "" H 6500 1900 50  0001 C CNN
+F 3 "~" H 6500 1900 50  0001 C CNN
+	1    6500 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 60ACCC31
+P 1000 1300
+F 0 "C?" H 908 1254 50  0000 R CNN
+F 1 "10nF" H 908 1345 50  0000 R CNN
+F 2 "" H 1000 1300 50  0001 C CNN
+F 3 "~" H 1000 1300 50  0001 C CNN
+	1    1000 1300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L L?
+U 1 1 60ACD55C
+P 1000 1750
+F 0 "L?" H 956 1704 50  0000 R CNN
+F 1 "COIL" H 956 1795 50  0000 R CNN
+F 2 "" H 1000 1750 50  0001 C CNN
+F 3 "~" H 1000 1750 50  0001 C CNN
+	1    1000 1750
+	-1   0    0    1   
+$EndComp
+$Comp
+L WPT_Project_Parts:B2100A D?
+U 1 1 60ACE553
+P 2000 1300
+F 0 "D?" V 1954 1380 50  0000 L CNN
+F 1 "B2100A" V 2045 1380 50  0000 L CNN
+F 2 "Diode_SMD:D_SMA" H 2000 1125 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/B2100A.pdf" H 2000 1300 50  0001 C CNN
+	1    2000 1300
+	0    1    1    0   
+$EndComp
+$Comp
+L WPT_Project_Parts:B2100A D?
+U 1 1 60ACE7FC
+P 2000 1800
+F 0 "D?" V 2046 1720 50  0000 R CNN
+F 1 "B2100A" V 1955 1720 50  0000 R CNN
+F 2 "Diode_SMD:D_SMA" H 2000 1625 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/B2100A.pdf" H 2000 1800 50  0001 C CNN
+	1    2000 1800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1000 1200 1000 1050
+Wire Wire Line
+	2000 1050 2000 1150
+Wire Wire Line
+	1000 1400 1000 1600
+Wire Wire Line
+	1000 1900 1000 2050
+Wire Wire Line
+	2000 2050 2000 1950
+Wire Wire Line
+	2000 1450 2000 1600
+Connection ~ 2000 1600
+Wire Wire Line
+	2000 1600 2000 1650
+$Comp
+L power:GND #PWR?
+U 1 1 60AD249C
+P 2500 2100
+F 0 "#PWR?" H 2500 1850 50  0001 C CNN
+F 1 "GND" H 2505 1927 50  0000 C CNN
+F 2 "" H 2500 2100 50  0001 C CNN
+F 3 "" H 2500 2100 50  0001 C CNN
+	1    2500 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VDC #PWR?
+U 1 1 60AD2B5F
+P 2500 1050
+F 0 "#PWR?" H 2500 950 50  0001 C CNN
+F 1 "VDC" H 2515 1223 50  0000 C CNN
+F 2 "" H 2500 1050 50  0001 C CNN
+F 3 "" H 2500 1050 50  0001 C CNN
+	1    2500 1050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 1500 2500 1450
+Wire Wire Line
+	2500 1600 2500 1650
+Wire Wire Line
+	2000 1600 2500 1600
+Wire Wire Line
+	1500 1500 2500 1500
+Wire Wire Line
+	1500 1500 1500 1650
+Connection ~ 1500 1500
+Wire Wire Line
+	1500 1450 1500 1500
+Wire Wire Line
+	1500 2050 2000 2050
+Connection ~ 1500 2050
+Wire Wire Line
+	1500 1950 1500 2050
+Wire Wire Line
+	1000 2050 1500 2050
+Wire Wire Line
+	1500 1050 1500 1150
+Wire Wire Line
+	1500 1050 2000 1050
+Connection ~ 1500 1050
+Wire Wire Line
+	1000 1050 1500 1050
+$Comp
+L WPT_Project_Parts:B2100A D?
+U 1 1 60ACE151
+P 1500 1800
+F 0 "D?" V 1454 1880 50  0000 L CNN
+F 1 "B2100A" V 1545 1880 50  0000 L CNN
+F 2 "Diode_SMD:D_SMA" H 1500 1625 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/B2100A.pdf" H 1500 1800 50  0001 C CNN
+	1    1500 1800
+	0    1    1    0   
+$EndComp
+$Comp
+L WPT_Project_Parts:B2100A D?
+U 1 1 60ACDE67
+P 1500 1300
+F 0 "D?" V 1546 1220 50  0000 R CNN
+F 1 "B2100A" V 1455 1220 50  0000 R CNN
+F 2 "Diode_SMD:D_SMA" H 1500 1125 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/B2100A.pdf" H 1500 1300 50  0001 C CNN
+	1    1500 1300
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4700 1600 4800 1600
+Wire Wire Line
+	4800 1600 5000 1600
+Connection ~ 4800 1600
+Wire Wire Line
+	4700 1950 4800 1950
+Wire Wire Line
+	4800 1950 4800 1800
+Wire Wire Line
+	4800 1800 5200 1800
+Connection ~ 4800 1800
+$Comp
+L power:GND #PWR?
+U 1 1 60AE11A4
+P 5200 2100
+F 0 "#PWR?" H 5200 1850 50  0001 C CNN
+F 1 "GND" H 5205 1927 50  0000 C CNN
+F 2 "" H 5200 2100 50  0001 C CNN
+F 3 "" H 5200 2100 50  0001 C CNN
+	1    5200 2100
+	1    0    0    -1  
+$EndComp
+Connection ~ 5200 1800
+Wire Wire Line
+	5200 1800 5400 1800
+Wire Wire Line
+	5700 1800 5750 1800
+Wire Wire Line
+	5300 1600 5750 1600
+Wire Wire Line
+	5750 1600 5750 1800
+Connection ~ 5750 1800
+Wire Wire Line
+	4700 2300 5800 2300
+Wire Wire Line
+	5800 2300 5800 2150
+Wire Wire Line
+	5750 1800 5800 1800
+Connection ~ 5800 2300
+Wire Wire Line
+	5800 1950 5800 1800
+Connection ~ 5800 1800
+$Comp
+L power:GND #PWR?
+U 1 1 60AE5155
+P 5800 2550
+F 0 "#PWR?" H 5800 2300 50  0001 C CNN
+F 1 "GND" H 5805 2377 50  0000 C CNN
+F 2 "" H 5800 2550 50  0001 C CNN
+F 3 "" H 5800 2550 50  0001 C CNN
+	1    5800 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5800 2550 5800 2500
+Wire Wire Line
+	3900 1950 3750 1950
+Wire Wire Line
+	3750 1950 3750 1850
+Wire Wire Line
+	3900 1600 3750 1600
+Wire Wire Line
+	3750 1600 3750 1650
+Wire Wire Line
+	2500 1450 2600 1450
+Wire Wire Line
+	3750 1450 3750 1600
+Connection ~ 2500 1450
+Wire Wire Line
+	2500 1450 2500 1050
+Connection ~ 2600 1450
+Wire Wire Line
+	2600 1450 3000 1450
+Connection ~ 3000 1450
+Wire Wire Line
+	3000 1450 3750 1450
+Connection ~ 3750 1600
+Wire Wire Line
+	3000 1650 2600 1650
+Connection ~ 2500 1650
+Wire Wire Line
+	2500 1650 2500 2100
+Connection ~ 2600 1650
+Wire Wire Line
+	2600 1650 2500 1650
+$Comp
+L power:GND #PWR?
+U 1 1 60AE7B9F
+P 3750 2450
+F 0 "#PWR?" H 3750 2200 50  0001 C CNN
+F 1 "GND" H 3755 2277 50  0000 C CNN
+F 2 "" H 3750 2450 50  0001 C CNN
+F 3 "" H 3750 2450 50  0001 C CNN
+	1    3750 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 2450 3750 2300
+Wire Wire Line
+	3750 2300 3900 2300
+$Comp
+L power:GND #PWR?
+U 1 1 60AEADEB
+P 6500 2100
+F 0 "#PWR?" H 6500 1850 50  0001 C CNN
+F 1 "GND" H 6505 1927 50  0000 C CNN
+F 2 "" H 6500 2100 50  0001 C CNN
+F 3 "" H 6500 2100 50  0001 C CNN
+	1    6500 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5800 1800 6150 1800
+Connection ~ 6150 1800
+Wire Wire Line
+	6150 1800 6500 1800
+Wire Wire Line
+	6150 2000 6150 2050
+Wire Wire Line
+	6150 2050 6500 2050
+Wire Wire Line
+	6500 2050 6500 2000
+Wire Wire Line
+	6500 2100 6500 2050
+Connection ~ 6500 2050
+$Comp
+L power:+3.3V #PWR?
+U 1 1 60AED472
+P 6500 1700
+F 0 "#PWR?" H 6500 1550 50  0001 C CNN
+F 1 "+3.3V" H 6515 1873 50  0000 C CNN
+F 2 "" H 6500 1700 50  0001 C CNN
+F 3 "" H 6500 1700 50  0001 C CNN
+	1    6500 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 1800 6500 1700
+Connection ~ 6500 1800
 $EndSCHEMATC
