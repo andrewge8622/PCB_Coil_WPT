@@ -12,6 +12,12 @@ K diode
 F https://www.diodes.com/assets/Datasheets/ds30086.pdf
 $ENDCMP
 #
+$CMP AH3574-P
+D Digital Switch Omnipolar Switch Open Drain Hall Effect 3-SIP
+K MAGNETIC SWITCH OMNIPOLAR 3SIP
+F https://www.diodes.com/assets/Datasheets/AH3574.pdf
+$ENDCMP
+#
 $CMP B2100A
 D DIODE SCHOTTKY 2.0A 100V
 K diode Schottky
@@ -28,6 +34,12 @@ $CMP DMN3023L
 D MOSFET N-CH 30V 6.2A SOT23
 K N-Channel MOSFET
 F https://www.diodes.com/assets/Datasheets/DMN3023L.pdf
+$ENDCMP
+#
+$CMP INA180A3
+D Current Sense Amplifier 1 Circuit Rail-to-Rail SOT-23-5
+K IC CURR SENSE 1 CIRCUIT SOT23-5
+F https://www.ti.com/lit/ds/symlink/ina180.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1622908481330
 $ENDCMP
 #
 $CMP MCP16331
