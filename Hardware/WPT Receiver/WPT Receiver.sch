@@ -1443,11 +1443,11 @@ Wire Wire Line
 Wire Wire Line
 	3300 9650 3750 9650
 NoConn ~ 3300 9750
-Text Label 4100 5200 2    50   ~ 0
+Text Label 4100 8100 2    50   ~ 0
 ISENSE
-Text Label 4100 5300 2    50   ~ 0
+Text Label 4100 6900 2    50   ~ 0
 VSENSE
-Text Label 4100 5100 2    50   ~ 0
+Text Label 4100 7000 2    50   ~ 0
 USER_BTN1
 Text Notes 4600 5600 2    50   ~ 0
 SPI1_SCK
@@ -1461,7 +1461,7 @@ Text Label 4100 5700 2    50   ~ 0
 SRCLR
 Text Label 4100 5800 2    50   ~ 0
 SER_0
-Text Label 4100 6900 2    50   ~ 0
+Text Label 4100 5400 2    50   ~ 0
 SR_EN
 Text Label 4100 7900 2    50   ~ 0
 DEBUG_RX
@@ -1474,12 +1474,6 @@ SDA
 Text Label 2000 8400 0    50   ~ 0
 HALL_INT
 Wire Wire Line
-	4100 5100 3600 5100
-Wire Wire Line
-	3600 5200 4100 5200
-Wire Wire Line
-	3600 5300 4100 5300
-Wire Wire Line
 	3600 5500 4100 5500
 Wire Wire Line
 	3600 5600 4100 5600
@@ -1491,8 +1485,6 @@ Wire Wire Line
 	3600 6000 4100 6000
 Wire Wire Line
 	3600 6100 4100 6100
-Wire Wire Line
-	3600 6900 4100 6900
 Text Label 1550 5700 0    50   ~ 0
 RST
 Wire Wire Line
@@ -4370,24 +4362,20 @@ Text Notes 3100 4750 2    75   ~ 15
 MCU
 Text Notes 13300 2000 2    75   ~ 15
 SHIFT REGISTERS
-NoConn ~ 3600 5400
-NoConn ~ 3600 5900
+NoConn ~ 3600 5300
 NoConn ~ 3600 6200
 NoConn ~ 3600 6300
 NoConn ~ 3600 6500
-NoConn ~ 3600 7000
-NoConn ~ 3600 7100
+NoConn ~ 3600 5100
 NoConn ~ 3600 7500
 NoConn ~ 3600 7600
 NoConn ~ 3600 7700
 NoConn ~ 3600 7800
-NoConn ~ 3600 8100
 NoConn ~ 3600 8200
 NoConn ~ 3600 8300
 NoConn ~ 3600 8400
 NoConn ~ 2400 8000
 NoConn ~ 2400 7900
-NoConn ~ 2400 7800
 NoConn ~ 2400 7500
 NoConn ~ 2400 7400
 NoConn ~ 2400 8700
@@ -4468,13 +4456,13 @@ Wire Wire Line
 $Comp
 L Connector:Conn_01x04_Female J4
 U 1 1 62243BA4
-P 4850 7900
-F 0 "J4" H 4878 7876 50  0000 L CNN
-F 1 "0.1\" Header" H 4878 7785 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 4850 7900 50  0001 C CNN
-F 3 "~" H 4850 7900 50  0001 C CNN
-	1    4850 7900
-	1    0    0    -1  
+P 4850 8000
+F 0 "J4" H 4878 7976 50  0000 L CNN
+F 1 "0.1\" Header" H 4878 7885 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 4850 8000 50  0001 C CNN
+F 3 "~" H 4850 8000 50  0001 C CNN
+	1    4850 8000
+	1    0    0    1   
 $EndComp
 $Comp
 L power:+3.3V #PWR063
@@ -4690,4 +4678,22 @@ Wire Wire Line
 	8200 9500 8500 9500
 Wire Wire Line
 	8500 9500 8500 9600
+Wire Wire Line
+	3600 7000 4100 7000
+Text Label 4100 7100 2    50   ~ 0
+USER_BTN2
+Wire Wire Line
+	3600 7100 4100 7100
+Text Label 4100 5900 2    50   ~ 0
+TEMP_INT
+Wire Wire Line
+	4100 5900 3600 5900
+NoConn ~ 2400 7800
+Wire Wire Line
+	4100 5400 3600 5400
+Wire Wire Line
+	4100 6900 3600 6900
+Wire Wire Line
+	3600 8100 4100 8100
+NoConn ~ 3600 5200
 $EndSCHEMATC
