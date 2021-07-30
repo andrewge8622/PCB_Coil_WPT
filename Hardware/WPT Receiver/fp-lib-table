@@ -1,4 +1,5 @@
 (fp_lib_table
   (lib (name WPT_Project_Parts)(type KiCad)(uri "C:/Users/Andrew Ge/Documents/Projects/PCB_Coil_WPT/Hardware/Coil Driver/WPT_Project_Parts.pretty")(options "")(descr ""))
   (lib (name Tag-connect)(type KiCad)(uri "C:/Users/Andrew Ge/Documents/Projects/PCB_Coil_WPT/Hardware/Coil Driver/Tag-connect.pretty")(options "")(descr ""))
+  (lib (name LOGOS)(type KiCad)(uri "C:/Users/Andrew Ge/Documents/Projects/PCB_Coil_WPT/Hardware/Coil Driver/LOGOS.pretty")(options "")(descr ""))
 )
