@@ -101,7 +101,8 @@ int main(void)
   MX_LPUART1_UART_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+	// Disable shift register output (active low) so LEDs don't turn on
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -386,7 +387,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : USER_BTN_1_Pin USER_BTN_2_Pin */
   GPIO_InitStruct.Pin = USER_BTN_1_Pin|USER_BTN_2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -409,9 +410,28 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI2_3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI2_3_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin == GPIO_PIN_1) // connected to user button 1
+    {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);
+    }
+	else if(GPIO_Pin == GPIO_PIN_2) // connected to user button 2
+    {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+    }
+}
 
 /* USER CODE END 4 */
 

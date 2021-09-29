@@ -72,14 +72,17 @@ void Error_Handler(void);
 #define VSENSE_GPIO_Port GPIOB
 #define USER_BTN_1_Pin GPIO_PIN_1
 #define USER_BTN_1_GPIO_Port GPIOB
+#define USER_BTN_1_EXTI_IRQn EXTI0_1_IRQn
 #define USER_BTN_2_Pin GPIO_PIN_2
 #define USER_BTN_2_GPIO_Port GPIOB
+#define USER_BTN_2_EXTI_IRQn EXTI2_3_IRQn
 #define ISENSE_Pin GPIO_PIN_12
 #define ISENSE_GPIO_Port GPIOB
 #define TEMP_INT_Pin GPIO_PIN_8
 #define TEMP_INT_GPIO_Port GPIOA
 #define HALL_INT_Pin GPIO_PIN_0
 #define HALL_INT_GPIO_Port GPIOD
+#define HALL_INT_EXTI_IRQn EXTI0_1_IRQn
 #define LD1_Pin GPIO_PIN_3
 #define LD1_GPIO_Port GPIOB
 #define LD2_Pin GPIO_PIN_4
