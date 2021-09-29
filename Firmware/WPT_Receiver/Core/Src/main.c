@@ -50,6 +50,8 @@ SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 
+static uint16_t BlinkyPin;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,15 +103,18 @@ int main(void)
   MX_LPUART1_UART_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+	BlinkyPin = GPIO_PIN_3;
+	
 	// Disable shift register output (active low) so LEDs don't turn on
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
+		HAL_GPIO_TogglePin(GPIOB, BlinkyPin);
 		HAL_Delay(500);
     /* USER CODE END WHILE */
 
@@ -423,13 +428,23 @@ static void MX_GPIO_Init(void)
 
 void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_1) // connected to user button 1
+	// Turn off blinky before transferring ownership
+	if (HAL_GPIO_ReadPin(GPIOB, BlinkyPin) == GPIO_PIN_SET)
+				HAL_GPIO_WritePin(GPIOB, BlinkyPin, GPIO_PIN_RESET);
+	
+	if(GPIO_Pin == GPIO_PIN_1) // connected to user button 1, increments blinky pin
     {
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);
+			if (BlinkyPin == GPIO_PIN_5) // accounts for rollover
+				BlinkyPin >>= 2;
+			else
+				BlinkyPin <<= 1; // shifts to next LED GPIO
     }
-	else if(GPIO_Pin == GPIO_PIN_2) // connected to user button 2
+	else if(GPIO_Pin == GPIO_PIN_2) // connected to user button 2, decrements blinky pin
     {
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+			if (BlinkyPin == GPIO_PIN_3)
+				BlinkyPin <<= 2;
+			else
+				BlinkyPin >>= 1;
     }
 }
 
