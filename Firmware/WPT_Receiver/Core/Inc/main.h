@@ -78,8 +78,6 @@ void Error_Handler(void);
 #define USER_BTN_2_EXTI_IRQn EXTI2_3_IRQn
 #define ISENSE_Pin GPIO_PIN_12
 #define ISENSE_GPIO_Port GPIOB
-#define TEMP_INT_Pin GPIO_PIN_8
-#define TEMP_INT_GPIO_Port GPIOA
 #define HALL_INT_Pin GPIO_PIN_0
 #define HALL_INT_GPIO_Port GPIOD
 #define HALL_INT_EXTI_IRQn EXTI0_1_IRQn
