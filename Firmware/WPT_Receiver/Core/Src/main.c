@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,6 +45,7 @@ ADC_HandleTypeDef hadc1;
 I2C_HandleTypeDef hi2c1;
 
 UART_HandleTypeDef hlpuart1;
+DMA_HandleTypeDef hdma_lpuart1_rx;
 
 SPI_HandleTypeDef hspi1;
 
@@ -57,7 +58,9 @@ static uint8_t BlinkyEn;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void ReverseRxIntoTx(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_LPUART1_UART_Init(void);
@@ -68,6 +71,18 @@ static void MX_SPI1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+#define RX_BUFFER_SIZE 20
+#define TX_BUFFER_SIZE 100
+#define MAIN_BUFFER_SIZE 40
+
+uint8_t DebugRxBuffer[RX_BUFFER_SIZE]; 
+uint8_t DebugTxData[TX_BUFFER_SIZE] = "DEFAULT\r\n";
+uint8_t MainDataBuffer[MAIN_BUFFER_SIZE];
+
+uint8_t OldPos = 0;
+uint8_t NewPos = 0;
+uint8_t RxDataLength = 0;
+uint8_t RxDataFlag = 0;
 
 /* USER CODE END 0 */
 
@@ -99,16 +114,22 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+	
 	BlinkyPin = GPIO_PIN_3;
 	BlinkyEn = 1;
 	
+	HAL_UARTEx_ReceiveToIdle_DMA(&hlpuart1, DebugRxBuffer, RX_BUFFER_SIZE);
+	__HAL_DMA_DISABLE_IT(&hdma_lpuart1_rx, DMA_IT_HT);
+	
 	// Disable shift register output (active low) so LEDs don't turn on
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+	// HAL_UART_Receive_DMA(&hlpuart1, DebugRxData, 20);
 	
   /* USER CODE END 2 */
 
@@ -123,6 +144,14 @@ int main(void)
 		}
 		else
 			HAL_GPIO_WritePin(GPIOB, BlinkyPin, GPIO_PIN_RESET);
+		
+		if (RxDataFlag) 
+		{
+			ReverseRxIntoTx();
+			HAL_UART_Transmit(&hlpuart1, DebugTxData, RxDataLength, 100);
+			RxDataFlag = 0;
+		}
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -297,8 +326,8 @@ static void MX_LPUART1_UART_Init(void)
 
   /* USER CODE END LPUART1_Init 1 */
   hlpuart1.Instance = LPUART1;
-  hlpuart1.Init.BaudRate = 209700;
-  hlpuart1.Init.WordLength = UART_WORDLENGTH_7B;
+  hlpuart1.Init.BaudRate = 115200;
+  hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
   hlpuart1.Init.StopBits = UART_STOPBITS_1;
   hlpuart1.Init.Parity = UART_PARITY_NONE;
   hlpuart1.Init.Mode = UART_MODE_TX_RX;
@@ -370,6 +399,25 @@ static void MX_SPI1_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+  /* DMA1_Ch4_5_DMAMUX1_OVR_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Ch4_5_DMAMUX1_OVR_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Ch4_5_DMAMUX1_OVR_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -435,6 +483,49 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void ReverseRxIntoTx(void)
+{
+	int index = OldPos;
+	for (int i = RxDataLength - 1; i >= 0; i--)
+	{
+		DebugTxData[i] = MainDataBuffer[index++];
+	}
+}
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(huart);
+  UNUSED(Size);
+
+	if(huart->Instance == LPUART1)
+	{
+		// code borrowed heavily from a tutorial from Controllers Tech
+		OldPos = NewPos; // Update the last position before copying new data
+		
+		if (OldPos+Size > MAIN_BUFFER_SIZE)
+		{
+			uint16_t BufferRemaining = MAIN_BUFFER_SIZE - OldPos; // remaining space in buffer
+			memcpy(MainDataBuffer + OldPos, DebugRxBuffer, BufferRemaining); // fill remaining space in main buffer
+			
+			OldPos = 0; // point to front of buffer
+			NewPos = Size - BufferRemaining; // mark endpoint of entry
+			memcpy (MainDataBuffer, DebugRxBuffer + BufferRemaining, NewPos); // copy overflow data to front of main buffer
+		}
+		else
+		{
+			memcpy(MainDataBuffer + OldPos, DebugRxBuffer, Size);
+			NewPos = Size + OldPos;
+		}
+			
+		RxDataFlag = 1;
+		RxDataLength = Size;
+		
+		HAL_UARTEx_ReceiveToIdle_DMA(&hlpuart1, DebugRxBuffer, RX_BUFFER_SIZE);
+		__HAL_DMA_DISABLE_IT(&hdma_lpuart1_rx, DMA_IT_HT);
+	}
+}
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
