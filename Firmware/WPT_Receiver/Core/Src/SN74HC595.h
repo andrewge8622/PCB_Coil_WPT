@@ -23,6 +23,9 @@ void SN74HC595_Enable(void);
 // disable shift register output
 void SN74HC595_Disable(void);
 
+// PWM outputs via enable pin
+void SN74HC595_PWM(uint8_t DutyCycle);
+
 // blank all outputs
 void SN74HC595_ClearAll(void);
 

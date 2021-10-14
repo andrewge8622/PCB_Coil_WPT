@@ -51,6 +51,8 @@ DMA_HandleTypeDef hdma_lpuart1_rx;
 
 SPI_HandleTypeDef hspi1;
 
+TIM_HandleTypeDef htim2;
+
 /* USER CODE BEGIN PV */
 
 static uint16_t BlinkyPin;
@@ -60,15 +62,15 @@ static uint8_t BlinkyEn;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void ReverseRxIntoTx(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_LPUART1_UART_Init(void);
 static void MX_SPI1_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-
+static void ReverseRxIntoTx(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -86,7 +88,7 @@ uint8_t NewPos = 0;
 uint8_t RxDataLength = 0;
 uint8_t RxDataFlag = 0;
 
-uint8_t shiftRegBuffer = 0xFE;
+uint8_t shiftRegBuffer = 0xF0;
 
 /* USER CODE END 0 */
 
@@ -123,6 +125,7 @@ int main(void)
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
   MX_SPI1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	
 	BlinkyPin = GPIO_PIN_3;
@@ -132,7 +135,9 @@ int main(void)
 	__HAL_DMA_DISABLE_IT(&hdma_lpuart1_rx, DMA_IT_HT);
 	
 	// Disable shift register output (active low) so LEDs don't turn on
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 	SN74HC595_Init();
+	
 	// HAL_UART_Receive_DMA(&hlpuart1, DebugRxData, 20);
 	
   /* USER CODE END 2 */
@@ -161,8 +166,10 @@ int main(void)
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 		shiftRegBuffer ^= 0xFF;
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-		
-		
+		HAL_Delay(1000);
+		SN74HC595_PWM(5);
+		HAL_Delay(1000);
+		SN74HC595_PWM(25);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -410,6 +417,65 @@ static void MX_SPI1_Init(void)
 }
 
 /**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 8;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 100;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 10;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+  HAL_TIM_MspPostInit(&htim2);
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -444,13 +510,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, SR_EN_Pin|RCLK_Pin|SR_CLR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, RCLK_Pin|SR_CLR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LD1_Pin|LD2_Pin|LD3_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : SR_EN_Pin RCLK_Pin SR_CLR_Pin */
-  GPIO_InitStruct.Pin = SR_EN_Pin|RCLK_Pin|SR_CLR_Pin;
+  /*Configure GPIO pins : RCLK_Pin SR_CLR_Pin */
+  GPIO_InitStruct.Pin = RCLK_Pin|SR_CLR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

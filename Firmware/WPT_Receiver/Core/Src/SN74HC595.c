@@ -2,28 +2,37 @@
 
 unsigned char ByteArray[NUMBER_OF_REGS] = {0};
 extern SPI_HandleTypeDef hspi1; // why does this work?
+extern TIM_HandleTypeDef htim2;
+uint8_t DutyCycle;
 
 void SN74HC595_Init(void) 
 {
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_EN_PIN, GPIO_PIN_SET); // immediately disable outputs, clear all data, then re-enable
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_CLR_PIN, GPIO_PIN_RESET); 
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_CLR_PIN, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_EN_PIN, GPIO_PIN_RESET);
+	DutyCycle = htim2.Instance->CCR4;
+	SN74HC595_Disable(); // immediately disable outputs, clear all data, then re-enable
+	SN74HC595_ClearAll();
+	SN74HC595_Enable();
 	HAL_GPIO_WritePin(SN74HC595_PORT, RCLK_PIN, GPIO_PIN_RESET); // set RCLK to low in preparation to latch out
 }
 void SN74HC595_Enable(void)
 {
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_EN_PIN, GPIO_PIN_RESET); // OE pin is active low
+	htim2.Instance->CCR4 = DutyCycle; // Note: OE pin is active low
 }
 
 void SN74HC595_Disable(void)
 {
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_EN_PIN, GPIO_PIN_SET); // OE pin is active low
+	htim2.Instance->CCR4 = 0;
+}
+
+void SN74HC595_PWM(uint8_t NewDutyCycle) 
+{
+	DutyCycle = NewDutyCycle;
+	htim2.Instance->CCR4 = DutyCycle;
 }
 
 void SN74HC595_ClearAll(void)
 {
-	HAL_GPIO_WritePin(SN74HC595_PORT, SR_CLR_PIN, GPIO_PIN_RESET); // toggle SR_CLR pin (active low)
+	HAL_GPIO_WritePin(SN74HC595_PORT, SR_CLR_PIN, GPIO_PIN_RESET);
+	SN74HC595_LatchValues();
 	HAL_GPIO_WritePin(SN74HC595_PORT, SR_CLR_PIN, GPIO_PIN_SET);
 }
 
