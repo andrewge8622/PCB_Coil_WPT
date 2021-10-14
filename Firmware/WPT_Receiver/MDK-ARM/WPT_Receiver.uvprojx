@@ -407,6 +407,11 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32g0xx_hal_msp.c</FilePath>
             </File>
+            <File>
+              <FileName>SN74HC595.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\SN74HC595.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

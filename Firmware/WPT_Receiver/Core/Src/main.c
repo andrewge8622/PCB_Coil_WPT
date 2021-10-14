@@ -23,6 +23,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "string.h"
+#include "SN74HC595.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -84,6 +86,8 @@ uint8_t NewPos = 0;
 uint8_t RxDataLength = 0;
 uint8_t RxDataFlag = 0;
 
+uint8_t shiftRegBuffer = 0xFE;
+
 /* USER CODE END 0 */
 
 /**
@@ -128,7 +132,7 @@ int main(void)
 	__HAL_DMA_DISABLE_IT(&hdma_lpuart1_rx, DMA_IT_HT);
 	
 	// Disable shift register output (active low) so LEDs don't turn on
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+	SN74HC595_Init();
 	// HAL_UART_Receive_DMA(&hlpuart1, DebugRxData, 20);
 	
   /* USER CODE END 2 */
@@ -151,6 +155,13 @@ int main(void)
 			HAL_UART_Transmit(&hlpuart1, DebugTxData, RxDataLength, 100);
 			RxDataFlag = 0;
 		}
+		
+		HAL_SPI_Transmit(&hspi1, &shiftRegBuffer, 1, 1);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+		shiftRegBuffer ^= 0xFF;
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+		
 		
     /* USER CODE END WHILE */
 
