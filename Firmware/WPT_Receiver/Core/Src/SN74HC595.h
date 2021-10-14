@@ -23,7 +23,7 @@ void SN74HC595_Enable(void);
 // disable shift register output
 void SN74HC595_Disable(void);
 
-// PWM outputs via enable pin
+// PWM outputs via enable pin, duty cycle of 0 to 100
 void SN74HC595_PWM(uint8_t DutyCycle);
 
 // blank all outputs
@@ -38,8 +38,14 @@ void SN74HC595_SendByte(uint8_t Output);
 // send multiple bytes of data
 void SN74HC595_SendBytes(uint8_t NumBytes, uint8_t *Values);
 
+// send entire array out to shift registers
+void SN74HC595_SendAllBytes(void);
+
 // update a byte of data within existing array
-void SN74HC595_UpdateByte(uint8_t ByteIndex, uint8_t BitIndex, uint8_t Value);
+void SN74HC595_UpdateByte(uint8_t ByteIndex, uint8_t Value);
+
+// update multiple bytes of data within existing array
+void SN74HC595_UpdateBytes(uint8_t ByteIndex, uint8_t NumBytes, uint8_t *Values);
 
 // update a bit of data within existing array
 void SN74HC595_UpdateBit(uint8_t ByteIndex, uint8_t BitIndex, uint8_t Value);

@@ -43,15 +43,30 @@ void SN74HC595_SetAll(void)
 
 void SN74HC595_SendByte(uint8_t Output)
 {
-	HAL_SPI_Transmit(&hspi1, &Output, 1, 1);
-}
-
-void SN74HC595_SendBit(uint8_t ByteIndex, uint8_t BitIndex, uint8_t Value)
-{
 	
 }
 
 void SN74HC595_SendBytes(uint8_t NumBytes, uint8_t *Values)
+{
+	
+}
+
+void SN74HC595_SendAllBytes(void)
+{
+	
+}
+
+void SN74HC595_UpdateByte(uint8_t ByteIndex, uint8_t Value)
+{
+	
+}
+
+void SN74HC595_UpdateBytes(uint8_t ByteIndex, uint8_t NumBytes, uint8_t *Values)
+{
+	
+}
+
+void SN74HC595_UpdateBit(uint8_t ByteIndex, uint8_t BitIndex, uint8_t Value)
 {
 	
 }
