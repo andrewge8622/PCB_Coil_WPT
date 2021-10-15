@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "string.h"
+#include <stdio.h>
 #include "SN74HC595.h"
 
 /* USER CODE END Includes */
@@ -88,11 +89,7 @@ uint8_t NewPos = 0;
 uint8_t RxDataLength = 0;
 uint8_t RxDataFlag = 0;
 
-uint8_t shiftRegBuffer = 0xF0;
-uint8_t tempBuffer[] = {0x03, 0xC0, 0x03, 0xF0, 0x0F};
-uint8_t ABuffer[] = {0x81, 0x81, 0xFF, 0x81, 0xFF};
-uint8_t GBuffer[] = {0xFF, 0x81, 0xFF, 0x80, 0xFF};
-
+uint32_t ADC_CurrentReading = 0;
 
 /* USER CODE END 0 */
 
@@ -144,12 +141,16 @@ int main(void)
 	
 	// HAL_UART_Receive_DMA(&hlpuart1, DebugRxData, 20);
 	
+	HAL_UART_Transmit(&hlpuart1, DebugTxData, 9, 100);
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		HAL_ADC_Start(&hadc1);
+		
 		if (BlinkyEn)
 		{
 			HAL_GPIO_TogglePin(GPIOB, BlinkyPin);
@@ -165,7 +166,15 @@ int main(void)
 			RxDataFlag = 0;
 		}
 		
-		SN74HC595_TestReel();
+		if(HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK) {
+			ADC_CurrentReading = HAL_ADC_GetValue(&hadc1);
+			char str[4];
+			HAL_UART_Transmit(&hlpuart1, (void *)str, sprintf(str, "%d\n", ADC_CurrentReading), 10);
+		}
+		
+		HAL_ADC_Stop(&hadc1);
+		
+		// SN74HC595_TestReel();
 		
     /* USER CODE END WHILE */
 
