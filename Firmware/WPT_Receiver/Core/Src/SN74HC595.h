@@ -4,7 +4,7 @@
 #include "stm32g0xx_hal.h"
 #include <stdint.h>
 
-#define NUMBER_OF_REGS
+#define NUMBER_OF_REGS 5
 
 #define SN74HC595_PORT GPIOA
 
@@ -33,24 +33,27 @@ void SN74HC595_ClearAll(void);
 void SN74HC595_SetAll(void);
 
 // send a single byte of data
-void SN74HC595_SendByte(uint8_t Output);
+static void SN74HC595_SendByte(uint8_t Output);
 
 // send multiple bytes of data
-void SN74HC595_SendBytes(uint8_t NumBytes, uint8_t *Values);
+static void SN74HC595_SendBytes(uint8_t NumBytes, uint8_t *Values);
 
 // send entire array out to shift registers
 void SN74HC595_SendAllBytes(void);
 
-// update a byte of data within existing array
+// update a byte of data within internal array
 void SN74HC595_UpdateByte(uint8_t ByteIndex, uint8_t Value);
 
-// update multiple bytes of data within existing array
+// update multiple bytes of data within internal array
 void SN74HC595_UpdateBytes(uint8_t ByteIndex, uint8_t NumBytes, uint8_t *Values);
 
-// update a bit of data within existing array
+// update a bit of data within internal array, where BitIndex starts with LSB within each byte
 void SN74HC595_UpdateBit(uint8_t ByteIndex, uint8_t BitIndex, uint8_t Value);
 
 // latch values into output register
 void SN74HC595_LatchValues(void);
+
+// demo all functions in this module
+void SN74HC595_TestReel(void);
 
 #endif

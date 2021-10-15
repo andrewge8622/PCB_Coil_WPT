@@ -89,6 +89,10 @@ uint8_t RxDataLength = 0;
 uint8_t RxDataFlag = 0;
 
 uint8_t shiftRegBuffer = 0xF0;
+uint8_t tempBuffer[] = {0x03, 0xC0, 0x03, 0xF0, 0x0F};
+uint8_t ABuffer[] = {0x81, 0x81, 0xFF, 0x81, 0xFF};
+uint8_t GBuffer[] = {0xFF, 0x81, 0xFF, 0x80, 0xFF};
+
 
 /* USER CODE END 0 */
 
@@ -161,15 +165,8 @@ int main(void)
 			RxDataFlag = 0;
 		}
 		
-		HAL_SPI_Transmit(&hspi1, &shiftRegBuffer, 1, 1);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-		shiftRegBuffer ^= 0xFF;
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-		HAL_Delay(1000);
-		SN74HC595_PWM(5);
-		HAL_Delay(1000);
-		SN74HC595_PWM(25);
+		SN74HC595_TestReel();
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
